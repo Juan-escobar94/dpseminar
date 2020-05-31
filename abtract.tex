@@ -9,49 +9,25 @@
 
 \begin{abstract}
 Dynamic Programming (short \textbf{\emph{DP}}) refers to a problem solving paradigm,
-  which seeks to solve optimization and counting problems in a very efficient manner by 
-  making use of the following trade-off: increased space complexity in order to get increased time efficiency. 
-  This trade-off can be achieved by modifying otherwise inefficient algorithms, so that the solution to many subproblems
-  that are encountered along the solving process is never computed twice: They are stored in a look-up table, and if the algorithm runs into a subproblem it has already seen, it takes the solution from this table
-  instead doing any other computation. This trade-off is made  possible by the traits that a DP problem must exhibit: 
+  which seeks to solve a problem by solving related subproblems and combining their solutions to solve the main problem.
+  As these subproblems may be encountered repeatedly along the solving process, DP algorithms store their solution, so 
+  that the same computation is never done twice, potentially making the computation for the main solution much faster at 
+  the cost of increased memory usage. DP is often applied to solve optimization problems and counting problems.
+
+  In order for a problem to be 'DP-solvable' it must exhibit the following traits:
+
   \begin{itemize}
-    \item \textbf{Optimal substructures}: The solution for a sub-problem is part of the solution of the original problem. \cite{halim2013competitive}, .
+    \item \textbf{Optimal substructures}: The solution for a subproblem is part of the solution of the original problem \cite{halim2013competitive}.
     \item \textbf{Ovelapping subproblems}: When a recursive algorithm repeatedly revisist the same subproblem in different branches along its recursion tree, we say that the problem has overlapping subproblems \cite{cormen2009introduction}. This is the key characteristic
     which allows the search space for a problem to be drastically reduced \cite{halim2013competitive}.
   \end{itemize}
   
-  DP can be applied to reduce the run time of a problem from exponential 
-  time complexity (using complete search algorithms), to polynomial time complexity. DP algorithms are implemented
+  When DP criteria is met, DP solutions may reduce the run time of a problem from exponential 
+  time complexity (using complete search algorithms), to polynomial time complexity. DP algorithms can be implemented
   in one of two ways: either recursively/top-down with memoization, or bottom-up. Both methods make use of a table in which the solution to subproblems are stored.
   We shall revisit also both techniques and analyze their pros and cons.
 
-  % Dynamic programming (short \emph{DP}) refers to a problem solving paradigm,
-  % in which the solution to a (most of the time) optimization (maximize
-  % this, minimize that variable) problem is sought. One can imagine
-  % that DP works similarly to divide and conquer: it divides the
-  % problem into different subproblems, which it most of the time
-  % recursively computes (when used in a top-down manner) and uses the partial
-  % answers to reach an optimal solution. One of the key differences between DP and divide and conquer is
-  % that instead of computing every single subproblem, DP makes use of the overlapping subproblems characteristic,
-  % it allows dp to manage a global table
-  % (usually called memo table) in which already computed solutions are
-  % kept. Before doing any computing, the DP algorithm performs a
-  % look-up on this table, and returns a value if there is one. if there
-  % is no such value, DP proceeds to compute recursively the solution
-  % and writes values on the table as it goes along, making them available
-  % for further computations that may stumble upon the exact same subproblem.
-  % the main idea behind this memo table is to
-  % >>remember<< and never compute something twice. In many
-  % mathematical/computational problems in which DP can be applied, DP
-  % algorithms are often times much more efficient in regards to time complexity compared
-  % to complete search algorithms, usually reducing exponential time complexity to polynomial, which
-  % is an incredible gain.
-
-  % The key aspect about DP is that the problem at hand must exhibit optimal
-  % substructures, meaning problems must overlap, meaning that the solution to a subproblem
-  % is dependent of the solution to its subsubproblems \cite{cormen2009introduction}.
   
-
   
 \bibliographystyle{acm}
 \bibliography{references.bib}
