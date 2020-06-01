@@ -14,7 +14,7 @@ Dynamic Programming (short \textbf{\emph{DP}}) refers to a problem solving parad
   that the same computation is never done twice, potentially making the computation for the main solution much faster at 
   the cost of increased memory usage. DP is often applied to solve optimization problems and counting problems.
 
-  In order for a problem to be 'DP-solvable' it must exhibit the following traits:
+  In order for a problem to be applicable to optimization it must exhibit the following traits:
 
   \begin{itemize}
     \item \textbf{Optimal substructures}: The solution for a subproblem is part of the solution of the original problem \cite{halim2013competitive}.
@@ -22,7 +22,7 @@ Dynamic Programming (short \textbf{\emph{DP}}) refers to a problem solving parad
     which allows the search space for a problem to be drastically reduced \cite{halim2013competitive}.
   \end{itemize}
   
-  When DP criteria is met, DP solutions may reduce the run time of a problem from exponential 
+  When these DP criteria are met, DP solutions may reduce the run time of a problem from exponential 
   time complexity (using complete search algorithms), to polynomial time complexity. DP algorithms can be implemented
   in one of two ways: either recursively/top-down with memoization, or bottom-up. Both methods make use of a table in which the solution to subproblems are stored.
   We shall revisit also both techniques and analyze their pros and cons.
