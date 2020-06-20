@@ -1,0 +1,44 @@
+\documentclass{article}
+
+% Math formulas
+\usepackage{amsmath}
+
+\usepackage{minted}
+
+
+% Zeichenkodierung und Schriftart
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+% TikZ
+\usepackage{tikz}
+\tikzset{
+  level/.style={
+    sibling distance=30mm/#1
+  },
+  level distance=10mm,
+}
+
+ \tikzset{
+  every node/.style={
+    draw,
+    circle,
+    inner sep=0pt,
+    minimum width=15pt
+  },
+  thick
+}
+
+
+\begin{document}
+\title{Dynamic Programming}
+\author{Juan Andrés Osorio Escobar}
+\date{\today}
+\maketitle
+
+\input{chapters/abstract.tex}
+\tableofcontents
+\input{chapters/introduction.tex}
+
+\end{document}

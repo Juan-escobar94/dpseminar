@@ -1,0 +1,62 @@
+
+ 
+ \section{introduction}
+
+
+What is dynamic programming? it really sounds like one of those big buzzwords that seem to
+attract big audiences that tend to follow trends. But put in simple words, Dynamic Programming is just a tabular method, 
+which reduces a lot of duplicate computations on a problem.How does dynamic programming work? lets have a look at an example first: The fibonacci numbers,
+which form a sequence defined as follows:
+
+  \[
+    fib(n) = \left\{\begin{array}{lr}
+      n, & \text{for } n = 1, n = 2\\
+      fib(n-1) + fib(n-2), & \text{otherwise}
+      \end{array}\right\}
+  \]
+
+we could write a simple program to compute the nth fibonacci number as follows:
+
+\begin{minted}[mathescape, linenos]{python}
+
+def fibonacci(n):
+  if (n <= 1):
+    return n
+  else :
+    return fibonacci(n - 1) + fibonacci(n + 2)
+
+\end{minted}
+
+
+to get a rough picture of the space complexity for this program, we could depict the steps
+the program would take to compute an arbitrary number n, in the form of a tree. For n = 6, we have:
+
+
+\begin{figure}[ht]
+  \centering
+  \begin{tikzpicture}
+    \node {6}
+      child { node {5}
+        child { node {4} 
+          child{ node {3} 
+            child { node {2}
+              child {node {1}}
+              child {node {0}}
+            }
+            child { node {1}}
+          }
+          child{ node[color=red] {2} }
+        }
+        child { node[color=red] {3} }
+      }
+      child { node[color=red] {4}
+      };
+  \end{tikzpicture}
+  \caption{Fibonacci recursion tree with $n = 6$}
+  \label{fig:fib1}
+\end{figure}
+
+There are 6 levels in this call tree and although the red nodes in \autoref{fig:fib1} are 
+not expanded, the algorithm has still to do all the work and visit this nodes until it gets to a node
+labeled with one or with zero. We can easily see how this can get out of hands with higher numbers, the 
+number of nodes is $O(2^n)$
