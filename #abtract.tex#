@@ -1,0 +1,46 @@
+\documentclass{article}
+
+
+\begin{document}
+\title{Dynamic Programming}
+\author{Juan Andrés Osorio Escobar}
+\date{\today}
+\maketitle
+
+\begin{abstract}
+Dynamic Programming (short \textbf{\emph{DP}}) refers to a problem solving paradigm,
+  which seeks to solve optimization and counting problems in a very efficient manner by 
+  making use of the following trade-off: increased space complexity in order to get increased time efficiency. 
+  This trade-off can be achieved by modifying otherwise inefficient algorithms, so that the solution to many subproblems
+  that are encountered along the solving process is never computed twice: They are stored in a look-up table, and if the algorithm runs into a subproblem it has already seen, it takes the solution from this table
+  instead doing any other computation. This trade-off is made  possible by the traits that a DP problem must exhibit: 
+  \begin{itemize}
+    \item \textbf{Optimal substructures}: The solution for a sub-problem is part of the solution of the original problem. \cite{halim2013competitive}, .
+    \item \textbf{Ovelapping subproblems}: When a recursive algorithm repeatedly revisist the same subproblem in different branches along its recursion tree, we say that the problem has overlapping subproblems \cite{cormen2009introduction}. This is the key characteristic
+    which allows the search space for a problem to be drastically reduced \cite{halim2013competitive}.
+  \end{itemize}
+  
+  DP can be applied to reduce the run time of a problem from exponential 
+  time complexity (using complete search algorithms), to polynomial time complexity. DP algorithms are implemented
+  in one of two ways: either recursively/top-down with memoization, or bottom-up. Both methods make use of a table in which the solution to subproblems are stored.
+  We shall revisit also both techniques and analyze their pros and cons.
+
+  
+  
+\bibliographystyle{acm}
+\bibliography{references.bib}
+  
+\end{abstract}
+
+
+\end{document}
+
+
+(1) Ist schon sehr gut so, nur fehlt mir noch ein bissl Struktur - derzeit wechselst du am Anfang von der prinzipiellen Beschreibung (trade) zur Umsetzung (table), um dann zu den Voraussetzungen für Optimierungsprobleme. Ich würde vorschlagen, zuerst das Prinzip zu beschreiben (wiederholte Berechnung sparen, indem man Teilergebnisse speichert; ohne optimization und counting problems zu erwähnen, weil DP ist noch vielseitiger anwendbar), dann zu sagen, dass DP häufig bei Optimierungsproblemen angewendet wird. Danach kannst du die Kriterien für DP bei Optimierungsproblemen angeben. Unten bei "DP algorithms ARE implemented" würde ich schwächer formulieren, z.B. "can be implemented" oder "two well-known DP implementations follow a recursive..." etc.
+(2) "increase space complexity" ist ein relativ exakt definierter Ausdruck in der theoretischen Informatik: space complexity kann durch eine Funktion s: N -> N angegeben werden, die die Eingabegröße n auf den Platzbedarf s(n) abbildet, der nun erhöht wird, d.h. wir haben eine neue Funktion s': N -> N, wo für jedes n gilt s(n) ≤ s'(n). Dahingegen ist "increased time efficiency" sehr verwaschen: was ist "Effizienz"? Du musst die beiden Sachen nicht im Abstract genau erklären, aber ich wollte dir nur deutlich machen, dass man bei dem Satz nicht genau ableiten kann, was DP für ein trade-off aufspannt.
+
+
+
+
+
+

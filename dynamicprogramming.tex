@@ -3,8 +3,10 @@
 % Math formulas
 \usepackage{amsmath}
 
+%include code
 \usepackage{minted}
 
+\usepackage{graphicx}
 
 % Zeichenkodierung und Schriftart
 \usepackage[utf8]{inputenc}
@@ -15,7 +17,7 @@
 \usepackage{tikz}
 \tikzset{
   level/.style={
-    sibling distance=30mm/#1
+    sibling distance=40mm/#1
   },
   level distance=10mm,
 }
@@ -37,8 +39,20 @@
 \date{\today}
 \maketitle
 
-\input{chapters/abstract.tex}
+
+%include: fügt zeilenumbrüche davor und dahinter: besser geeignet für eigenständige Kapiteln
+%input: fügt das nur so ein.
+\include{chapters/abstract}
 \tableofcontents
-\input{chapters/introduction.tex}
+\include{chapters/introduction}
+\include{chapters/elements}
+\include{chapters/matrixmult}
+\include{chapters/stateandtransition}
+\include{chapters/classicaldpprobs}
+\include{chapters/topvsbottom}
+
+
+\bibliographystyle{acm}
+\bibliography{references.bib}
 
 \end{document}
