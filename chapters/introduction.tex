@@ -24,7 +24,7 @@ def fibonacci(n):
   if (n <= 1):
     return n
   else :
-    return fibonacci(n - 1) + fibonacci(n + 2)
+    return fibonacci(n - 1) + fibonacci(n - 2)
 
 \end{minted}
 
@@ -121,7 +121,7 @@ def dp_fibonacci(n):
   if (look_up_table.at(n)):
     return look_up_table.at(n)
   else :
-    look_up_table[n] = dp_fibonacci(n - 1) + dp_fibonacci(n + 2)
+    look_up_table[n] = dp_fibonacci(n - 1) + dp_fibonacci(n - 2)
     return look_up_table[n]
 \end{minted}
 
