@@ -1,1 +1,46 @@
-\section{matrix chain multiplication}
+\section{Matrix-Chain Multiplication}
+
+The Matrix-Chain Multiplication problem is another example in which we can 
+apply Dynamic Programming, yielding important performance gains.
+
+Suppose we have a product (also called chain) of Matrices, numbered from 1 to n. Their product is
+calculated as follows:
+
+$$A_1A_2A_3...A_n$$
+
+The number of scalar multiplications that have to be performed when multiplying matrices $A_1$
+and $A_2$ with dimensions $m_1xn_1$ and $m_2n_2$ is equal to $m_1n_1n_2$ (remember that
+for a two matrices, rows and columns must match in their number, else the matrices are not 
+compatible and the multiplication cannot be performed). 
+
+Now, how does this problem even relate to Dynamic Programming? remember that Matrix 
+multiplication is \emph{associative} which means that parenthesization does not alter
+the end result, in other words: $((A_1A_2)A_3) = (A_1((A_2A_3))$.
+
+The product obtained by this multiplication will not vary with the way we parenthesize,
+but the ammount of multiplications required may very well vary. Suppose we have
+matrices of dimensions 3x50, 50x2 and 2x40, the first parenthesization yields 
+3x50x2 + 3x2x40 = 540 multiplications, while the second variant yields
+50x2x40 + 3x50x40 = 10000 multiplication, an almost scandalous difference.
+
+\begin{quote}How we parenthesize a chain of matrices can have a dramatic impact of evaluating
+the product \cite{cormen2009introduction}\end{quote}
+
+the abridged problem statement can be written down as follows: given a n chain of matrices,
+find a parenthesization with the least ammount of multiplications. These matrices are compatible
+for multiplication, and for $i = 1, 2, ..., n$ the matrix $A_i$ has dimension $p_{i-1} * p_i$
+
+Brute forcing this problem:
+
+
+catalan numbers formula
+
+
+Complexity
+
+
+complexity new algo
+
+new algo description
+
+new algo graphics

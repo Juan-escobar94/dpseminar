@@ -1,14 +1,40 @@
 \section{elements of dynamic Programming}
 
-Having seen how beneficial Dynamic Programming (from now on \emph{DP} can be, it would be logical to
-try to adapt algorithms to use a DP similar approach, but this is not always possible.
-A problem must have specific properties in order to be solved in a DP fashion. We have
+Having seen how beneficial Dynamic Programming can be, it would be logical to
+try to adapt algorithms to use a Dynamic Programming similar approach, but this is not always possible.
+A problem must have specific properties in order to be solved in a Dynamic Programming fashion. We have
 mentioned this traits: Optimal Substructures and Overlapping Substructures.
 
 \subsection{Optimal Substructures}
 
 as we have seen in the fibonacci example, solutions to problems are 
-related to solution to sub problems. The Tree representation for fibonacci makes
-this concept very clear.
+related to solution to its sub-problems. The Tree representation for fibonacci 
+makes this concept very clear: The solution to a node placed in a higher 
+level depends on the solution to its sub-problems: the nodes situated under it.
+
+In optimization problems, an optimal solution to a problem involves optimally
+solving its subproblems. A useful to illustrate this is the rod-cutting problem:
+
+\indent \emph{Abridged Problem Statement}: given a rod of length n, and a table of prices $p_i$ for $i = 1, 2, ..., n$,
+determine the maximum revenue $r_n$ obtained by cutting the rod and selling the pieces \cite{cormen2009introduction}
+
+%ToDo: make table and explain breifly with an example
+
+
+
+
 
 \subsection{Overlapping Subproblems}
+
+There is another key property which a problem must posses, for Dynamic Programming to
+be applicable. Often times the Search Space of the problem at hand is relatively small,
+but naive solutions revisit the same problems over and over, as we have seen in the red
+nodes in the fibonacci example, in figure %ToDo: insert figure.
+
+When an algorithm revisits the same problem repeatedly, Cormen et al have coined the term
+that the problem at hand has \emph{Overlapping Subproblems}.
+
+Dynamic Programming solutions take advantage of this property and store the solution
+of known problems in a data structure, so when this problem is encountered again, 
+the algorithm takes constant time solving it, just by performing a look up at the Data
+Structure. In our fibonacci case, this would be our dicionary called \emph{look\_up\_table}
