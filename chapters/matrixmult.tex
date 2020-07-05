@@ -25,7 +25,8 @@ the product \cite{cormen2009introduction}
 Now, how does this problem relate to Dynamic Programming? as we just said, in matrix 
 multiplication, the way we parenthesize does not alter the end product, in other words it is
 \emph{associative}, meaning:  $((A_1A_2)A_3) = (A_1((A_2A_3))$. By using Dynamic Programming
-we can abuse the nature of this problem and find an optimal parenthesization.
+we can abuse the nature of this problem (exhibits both optimal substructures and
+overlapping subproblems, as we will see) and find an optimal parenthesization.
 
 This problem clearly posseses the property of optimal substructures, an optimal 
 parenthesized product consists as well of optimal parenthesized products. An optimal
@@ -55,11 +56,5 @@ fully parenthesized subproducts, and the split between two products may occur be
   \\
 
 
-The solution to this recurrence is $\omega (2^n)$ 
-
-DP:
-new algo description
-complexity new algo
-
-
-new algo graphics
+The solution to this recurrence is $\Omega (2^n)$ \cite{cormen2009introduction}, for an input of n matrices.
+going over all possible solutions using a brute force approach is a quite unefficient strategy.

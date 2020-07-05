@@ -1,36 +1,36 @@
 
  
- \section{introduction}
+ \section{Introduction}
 
 
-What is Dynamic Programming? it really sounds like one of those big buzzwords that seem to
+What is Dynamic Programming? It really sounds like one of those big buzzwords that seem to
 attract big audiences that tend to follow trends. But put in simple words, Dynamic Programming is just a tabular method, 
-which reduces a lot of duplicate computations on a problem. Now, how does Dynamic Programming work? lets dive in with a simple example at first, the fibonacci numbers,
+which reduces a lot of duplicate computations on a problem. Now, how does Dynamic Programming work? lets dive in with a simple example at first, the Fibonacci numbers,
 which form a sequence defined as follows:
   \\
   \[
     fib(n) = \left\{\begin{array}{lr}
-      n, & \text{for } n = 1, n = 2\\
+      1, & \text{for } n = 0, n = 1\\
       fib(n-1) + fib(n-2), & \text{otherwise}
       \end{array}\right\}
   \]
   \\
 
-we could write a simple program to compute the nth fibonacci number in this way:
+We could write a simple program to compute the n-th Fibonacci number in this way:
 
 \begin{minted}{python}
 
 def fibonacci(n):
   if (n <= 1):
-    return n
+    return 1
   else :
     return fibonacci(n - 1) + fibonacci(n - 2)
 
 \end{minted}
 
 
-to get a rough picture of the space and time complexity for this program, we could depict the steps
-the program would take to compute an arbitrary number n, in the form of a tree. For n = 6, we have:
+To get a rough picture of the space and time complexity for this program, we could depict the steps
+the program would take to compute an arbitrary number $n$, in the form of a tree. For $n = 6$, we have:
 
 
 \begin{figure}[ht]
@@ -57,9 +57,9 @@ the program would take to compute an arbitrary number n, in the form of a tree. 
   \label{fig:fib1}
 \end{figure}
 
-The red nodes in figure \ref{fig:fib1} still have to be visited by the algorithm, and they are expanded all 
+The red nodes in Figure \ref{fig:fib1} still have to be visited by the algorithm, and they are expanded all 
 way down into a node with label one or zero, even though if the answer was already computed in any other 
-branch of the tree. This repetitive computation slows down the program drastically as n grows,
+branch of the tree. This repetitive computation slows down the program drastically as $n$ grows,
 you can see that the number of nodes grows exponentially, since for every level we traverse down,
 the number of nodes potentially double: the time complexity for this algorithm is $O(2^n)$, which is 
 the number of nodes.
@@ -95,17 +95,17 @@ the number of nodes.
         }
       };
   \end{tikzpicture}
-  \caption{Expanded fibonacci recursion tree}
+  \caption{Expanded Fibonacci recursion tree}
   \label{fig:fib2}
 \end{figure}
 
-in figure \ref{fig:fib2} we expanded one of the red nodes labeled with 4: it gets computed twice, completely.
+In Figure \ref{fig:fib2} we expanded one of the red nodes labeled with 4: it gets computed twice, completely.
 expanding all the tree would show us that node 3 gets computed three times, node 2 gets computed five times.
-if we chose n = 7, for example, node 2 would be computed eight times. This unnecessary repeated
+If we chose $n = 7$, for example, node 2 would be computed eight times. This unnecessary repeated
 computations are  what makes this algorithm so slow.
 
 Now, what if instead of repeating all this computations, the answers are stored somewhere? Each
-time the algorithm would start , it wouldinstead look up in some kind of record or table, 
+time the algorithm would start, it would instead look up in some kind of record or table, 
 and if it finds a value, it just simply returns the value found immediatly.
 
 
@@ -126,8 +126,8 @@ def dp_fibonacci(n):
 \end{minted}
 
 
-applying this change to the algorithm, yields a linear run time $O(n)$. This is because instead of expanding the
-nodes marked red, dp\_fibonacci just retrieves the value from a dictionary, which is $O(1)$. This
+Applying this change to the algorithm, yields a linear run time $O(n)$. This is because instead of expanding the
+nodes marked red, \texttt{dp\_fibonacci} just retrieves the value from a dictionary, which is $O(1)$. This
 is a tremendous gain in performance.
 
 

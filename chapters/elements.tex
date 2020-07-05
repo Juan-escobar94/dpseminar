@@ -1,4 +1,4 @@
-\section{elements of dynamic Programming}
+\section{Elements of Dynamic Programming}
 
 Having seen how beneficial Dynamic Programming can be, it would be logical to
 try to adapt algorithms to use a Dynamic Programming similar approach, but this is not always possible.
@@ -7,8 +7,8 @@ mentioned this traits: Optimal Substructures and Overlapping Substructures.
 
 \subsection{Optimal Substructures}
 
-as we have seen in the fibonacci example, solutions to problems are 
-related to solution to its sub-problems. The Tree representation for fibonacci 
+As we have seen in the Fibonacci example, solutions to problems are 
+related to solution to its sub-problems. The Tree representation for Fibonacci 
 makes this concept very clear: The solution to a node placed in a higher 
 level depends on the solution to its sub-problems: the nodes situated under it.
 
@@ -18,10 +18,35 @@ solving its subproblems. A useful to illustrate this is the rod-cutting problem:
 \indent \emph{Abridged Problem Statement}: given a rod of length n, and a table of prices $p_i$ for $i = 1, 2, ..., n$,
 determine the maximum revenue $r_n$ obtained by cutting the rod and selling the pieces \cite{cormen2009introduction}
 
-%ToDo: make table and explain breifly with an example
+Suppose we have the following price table:
+\begin{table}[ht]
+\centering
+\begin{tabular}{l|ll}
+  \textbf{length i}&\textbf{price $p_i$}\\\hline
+  1 & 2\\
+  2 & 6\\
+  3 & 7\\
+  4 & 8\\
+  5 & 9
+\end{tabular}
+\caption{Price Table for the rod-cutting problem}
+\label{fig:priceforrods}
+\end{table}
 
+Having a rod of length $l = 1$ is quite trivial, the optimal solution is to leave the rod as it is, as we 
+assume it cannot be cut furthermore. a road of length $l = 2$ is already at optimal length,
+as its selling price 6 is higher than selling two rods of length $l = 1$ for a total of 4.
+We see for example of length $l = 3$ that the optimal solution is cutting once, leaving
+a rod of length $l = 2$ and a rod of length $l = 1$, for a total of $r = 8$. We can see that the optimal
+solution to a road of length n involves considering  all posible ways of cutting the rod which
+may range from 1 up to $n - 1$, as well as considering not cutting the rod, as was the case in length
+$l = 2$. cutting a rod at length k creates two sub problems, ranging from 
+$1 - k$ and $k+1 - n$. Both of these problems must be optimally solved in order to obtain max revenue.
 
-
+For example, having a rod of length $l = 5$, we cut the rod at $k = 2$, leaving us with rods of length
+$l = 2$ and length $l = 3$, if we were to cut the first road again, we will loose revenue, this road is already
+optimally cut. But we can the rod of length $l = 3$ into pieces of lengths $l = 2$ and $l = 1$, for a total revenue of
+14. If we were to sell the rod uncut, $l = 5$,  we would receive only a revenue of 9.
 
 
 \subsection{Overlapping Subproblems}
@@ -29,12 +54,12 @@ determine the maximum revenue $r_n$ obtained by cutting the rod and selling the 
 There is another key property which a problem must posses, for Dynamic Programming to
 be applicable. Often times the Search Space of the problem at hand is relatively small,
 but naive solutions revisit the same problems over and over, as we have seen in the red
-nodes in the fibonacci example, in figure %ToDo: insert figure.
+nodes in the Fibonacci example, in Figure \ref{fig:fib2}
 
-When an algorithm revisits the same problem repeatedly, Cormen et al have coined the term
+When an algorithm revisits the same problem repeatedly, Cormen et. al. have coined the term
 that the problem at hand has \emph{Overlapping Subproblems}.
 
 Dynamic Programming solutions take advantage of this property and store the solution
 of known problems in a data structure, so when this problem is encountered again, 
 the algorithm takes constant time solving it, just by performing a look up at the Data
-Structure. In our fibonacci case, this would be our dicionary called \emph{look\_up\_table}
+Structure. In our Fibonacci case, this would be our dicionary called \texttt{look\_up\_table}
