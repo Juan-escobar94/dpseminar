@@ -9,38 +9,57 @@ calculated as follows:
 $$A_1A_2A_3...A_n$$
 
 The number of scalar multiplications that have to be performed when multiplying matrices $A_1$
-and $A_2$ with dimensions $m_1xn_1$ and $m_2n_2$ is equal to $m_1n_1n_2$ (remember that
+and $A_2$ with dimensions $m_1 \times n_1$ and $m_2\times n_2$ is equal to $m_1*n_1*n_2$ .Rremember that
 for a two matrices, rows and columns must match in their number, else the matrices are not 
-compatible and the multiplication cannot be performed). 
-
-Now, how does this problem even relate to Dynamic Programming? remember that Matrix 
-multiplication is \emph{associative} which means that parenthesization does not alter
-the end result, in other words: $((A_1A_2)A_3) = (A_1((A_2A_3))$.
+compatible and the multiplication can not be performed, hence we could have also written $m_1*m_2*n_2$
 
 The product obtained by this multiplication will not vary with the way we parenthesize,
 but the ammount of multiplications required may very well vary. Suppose we have
-matrices of dimensions 3x50, 50x2 and 2x40, the first parenthesization yields 
-3x50x2 + 3x2x40 = 540 multiplications, while the second variant yields
-50x2x40 + 3x50x40 = 10000 multiplication, an almost scandalous difference.
+matrices of dimensions $A_1 = 3 \times 50$, $A_2 = 50 \times 2$ and $A_3 = 2 \times 40$, 
+the first parenthesization $((A_1A_2)A_3)$ yields $3*50*2 + 3*2*40 = 540$
+multiplications, while the second variant $(A_1((A_2A_3))$ yields 
+$50*2*40 + 3*50*40 = 10000$ multiplications, an almost scandalous difference.
+How we parenthesize a chain of matrices can have a dramatic impact of evaluating
+the product \cite{cormen2009introduction}
 
-\begin{quote}How we parenthesize a chain of matrices can have a dramatic impact of evaluating
-the product \cite{cormen2009introduction}\end{quote}
+Now, how does this problem relate to Dynamic Programming? as we just said, in matrix 
+multiplication, the way we parenthesize does not alter the end product, in other words it is
+\emph{associative}, meaning:  $((A_1A_2)A_3) = (A_1((A_2A_3))$. By using Dynamic Programming
+we can abuse the nature of this problem and find an optimal parenthesization.
+
+This problem clearly posseses the property of optimal substructures, an optimal 
+parenthesized product consists as well of optimal parenthesized products. An optimal
+parenthesized product would be the parenthesization resulting in the minimum of 540
+multiplications in our previous example. Suppose instead of having matrices $A_1$, 
+$A_2$ and $A_3$ we had products of matrices, which in turn must be optimally parenthesized
+to yield an optimal solution.
 
 the abridged problem statement can be written down as follows: given a n chain of matrices,
 find a parenthesization with the least ammount of multiplications. These matrices are compatible
 for multiplication, and for $i = 1, 2, ..., n$ the matrix $A_i$ has dimension $p_{i-1} * p_i$
 
-Brute forcing this problem:
+
+In order to better understand the search space for this problem, let us first count the number
+of ways we can parenthesize a matrix chain. in \cite{cormen2009introduction}, the number of
+parenthesizations of a sequence of n matrices are denoted by P(n). When n = 1, there is just one matrix and there is only
+one way to parenthesize it. when $n \geq 2$, a fully parenthesized matrix chain is the product of to 
+fully parenthesized subproducts, and the split between two products may occur between the \emph{k}th and the
+\emph{(k + 1)}st matrices for any k = 1, 2, ..., n-1. obtaining:
+  \\
+  \[
+    P(n) = \left\{\begin{array}{lr}
+      1, & \text{if } n = 1,\\
+      \sum_{k=1}^{n-1}P(k)P(n-k), & \text{if } n \geq 2.
+      \end{array}\right\}
+  \]
+  \\
 
 
-catalan numbers formula
+The solution to this recurrence is $\omega (2^n)$ 
 
-
-Complexity
-
-
+DP:
+new algo description
 complexity new algo
 
-new algo description
 
 new algo graphics
