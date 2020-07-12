@@ -1,0 +1,158 @@
+\section{Introduction}
+\subsection{Definition}
+
+\begin{frame}
+  \frametitle{Introduction}
+  \begin{block}{Definition}
+   What is Dynamic Programming?
+   \begin{itemize}
+     \item Problem Solving Paradigm
+     \item Algorithm Design Technique
+   \end{itemize}
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Introduction}
+  \begin{block}{Key Properties}
+   A problem which is solvable through Dynamic
+   Programming has the following properties:
+   \begin{itemize}
+     \item Optimal Substructure
+     \item Overlapping Subproblems
+   \end{itemize}
+  \end{block}
+
+  % \begin{alertblock}{}
+  %   here is some thext
+  % \end{alertblock}
+\end{frame}
+
+\subsection{Fibonacci Sequence}
+\begin{frame}
+  \frametitle{Introduction - Fibonacci Sequence}
+  Let us first take a look at a simple Dynamic Programming approach.
+
+  \begin{block}{Example}
+    The Fibonacci sequence is defined as follows:
+    \\
+    \[
+    fib(n) = \left\{\begin{array}{lr}
+      1, & \text{for } n = 0, n = 1\\
+      fib(n-1) + fib(n-2), & \text{otherwise}
+      \end{array}\right\}
+    \]
+    \\
+  \end{block}
+\end{frame}
+
+
+
+\begin{frame}[fragile]
+  \frametitle{Introduction - Fibonacci Sequence}
+  \begin{block}{Example}
+    A naive solution for computing the n-th number in the 
+    Fibonacci sequence:
+  \end{block}
+  \begin{lstlisting}
+
+      def fibonacci(n):
+        if (n <= 1):
+          return 1
+        else:
+          return fibonacci(n - 1) + fibonacci(n - 2)
+
+    \end{lstlisting}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Introduction - Fibonacci Sequence}
+\begin{figure}[ht]
+  \centering
+  \begin{tikzpicture}
+    \node {6}
+      child { node {5}
+        child { node {4} 
+          child{ node {3} 
+            child { node {2}
+              child {node {1}}
+              child {node {0}}
+            }
+            child { node {1}}
+          }
+          child{ node[color=red] {2} }
+        }
+        child { node[color=red] {3} }
+      }
+      child { node[color=red] {4}
+      };
+  \end{tikzpicture}
+  \caption{Fibonacci recursion tree with $n = 6$}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+% \frametitle{Introduction - Fibonacci Sequence}
+\begin{figure}[ht]
+  \centering
+  \begin{tikzpicture}
+    \node {6}
+      child { node {5}
+        child { node {4} 
+          child{ node {3} 
+            child { node {2}
+              child {node {1}}
+              child {node {0}}
+            }
+            child { node {1}}
+          }
+          child{ node[color=red] {2} }
+        }
+        child { node[color=red] {3} }
+      }
+      child { node[color=red] {4}
+      };
+  \end{tikzpicture}
+  \caption{Fibonacci recursion tree with $n = 6$}
+\end{figure}
+\begin{alertblock}{!}
+  Every red-colored Node is a computation we are doing not for the
+  first time!
+\end{alertblock}
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{Introduction - Fibonacci Sequence}
+  \begin{block}{Dynamic Programming Approach}
+    How about we keep record of the values we compute?
+  \end{block}
+  \begin{lstlisting}
+    # initialize the look up table with 
+    # non-recursively defined fibonacci numbers.
+    look_up_table = {
+      0: 1,
+      1: 1  
+    }
+
+    def dp_fibonacci(n):
+      if (look_up_table.at(n)):
+        return look_up_table.at(n)
+      else :
+        look_up_table[n] = dp_fibonacci(n - 1) + dp_fibonacci(n - 2)
+        return look_up_table[n]
+  \end{lstlisting}
+\end{frame}
+
+
+\begin{frame}
+  \begin{block}{Discussion}
+    Our modifications to the original approach have
+    caused changes in the following aspects in our program:
+    \begin{itemize}
+      \item Memory Usage
+      \item Time needed to compute the solution
+    \end{itemize}
+  \end{block}
+\end{frame}

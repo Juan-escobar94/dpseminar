@@ -1,0 +1,56 @@
+\documentclass{beamer}
+% TikZ
+\usepackage{tikz}
+\tikzset{
+  level/.style={
+    sibling distance=40mm/#1
+  },
+  level distance=10mm,
+}
+
+ \tikzset{
+  every node/.style={
+    draw,
+    circle,
+    inner sep=0pt,
+    minimum width=15pt
+  },
+  thick
+}
+% Code representation, thanks to github:anaechavarria for this config.
+\usepackage{listings}
+\renewcommand{\lstlistingname}{Código}
+\lstset{
+	language=Python,               % Lenguaje
+	basicstyle=\ttfamily\footnotesize,  % Tipo de fuente
+	keywordstyle=\color{blue},  % Color de palabras clave
+	stringstyle=\color{red},    % Color de strings
+	commentstyle=\color{gray},  % Color de comentarios
+	showstringspaces=false,     % No muestrar el _ cuando el string tiene espacios
+	breaklines = true,          % Partir las líneas largas
+	breakatwhitespace=true,	    % Partir las líneas en un espacio
+	% numbers=left,				% Numerar las líneas a la izq
+	numberstyle=\tiny,			% Poner los números de las líneas pequeños
+	numberblanklines=false,      % Numerar las líneas en blanco
+	columns=fullflexible,       % No perder el formato al dejar los espacios
+	keepspaces=true,   			% Dejar los espacios insertados
+	frame=tb,					% Poner el recuadro
+}
+
+
+
+
+\title[]{Proseminar Theoretische Informatik}
+\subtitle{Dynamic Programming}
+\author{Juan Andrés Osorio Escobar}
+\date{\today}
+\usetheme{Madrid}
+
+\begin{document}
+  \input{presentation/slide_title}
+  \input{presentation/slide_contents}
+  \input{presentation/slide_introduction}
+  \input{presentation/slide_elements_dp}
+  \input{presentation/slide_matrixmult}
+  \input{presentation/slide_top_vs_bottom}
+\end{document}
