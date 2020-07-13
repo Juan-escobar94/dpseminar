@@ -1,16 +1,107 @@
-\section{Matrix Multiplication Problem}
+\section{Matrix-chain Multiplication Problem}
 
 
-\begin{frame}{Matrix Multiplication Problem - Problem Statement}
-  
+\begin{frame}{Matrix-chain Multiplication Problem}
+  It is known that multiplying matrices is a very frequent mathematical
+  operation among the most varied application fields. Multiplying Matrices 
+  $A_1$ and $A_2$ requires matching dimensions: the number of rows in $A_1$
+  must match the number of columns in $A_2$ if one is to multiply the Matrices 
+  in this order $A_{1}A_{2}$.
+  \\
+  \vspace{2em}
+  The product obtained by multiplying a chain of matrices $A_{1}A_{2}...A_{n}$ 
+  can be obtained by parenthesizing the chain in many different ways.
 \end{frame}
 
 
-\begin{frame}{Matrix Multiplication Problem - Optimal Solution Structure}
+\begin{frame}{Matrix-chain Multiplication Problem - Parenthesization}
+  \begin{block}{Fully Parenthesized Product}
+    A product of matrices is called \textbf{\emph{fully parenthesized}}
+    either if it is a single matrix, or a fully parenthesized product of two matrixes, 
+    surrounded by parenthesis.
+  \end{block}
+  \pause
+  For example, a matrix chain consisting of the matrices $A_{1}A_{2}A_{3}A_{4}$ can be
+  parenthesized in the following ways:
+  \begin{itemize}
+    \item $(((A_{1}A_{2})A_{3})A_{4})$
+    \item $(A_{1}((A_{2}A_{3})A_{4}))$
+    \item $(A_{1}(A_{2}(A_{3}A_{4})))$
+    \item $((A_{1}(A_{2}A_{3}))A_{4})$
+    \item $((A_{1}A_{2})(A_{3}A_{4}))$
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Matrix Multiplication Problem - Problem Statement}
+  The way we parenthesize a matrix can have an enormous impact in the number
+  of multiplications we have to compute in the end. 
   
+  Take for example matrices $A_1$, $A_2$ and $A_3$ with dimensions $3 \times 50$, $50 \times 2$
+  and $2 \times 40$ respectively, forming the chain $A_{1}A_{2}A_{3}$. we have the following parenthesization choices
+  \\
+  \vspace{0.5em}
+  \begin{itemize}
+    \item $((A_{1}A_{2})A_{3})$ yielding $3 \times 50 \times 2 + 3 \times 2 \times 40 = 540$ multiplications.
+    \item  $(A_{1}(A_{2}A_{3}))$ yielding $50 \times 2 \times 40 + 3 \times 50 \times 40 = 10000$ multiplications.
+  \end{itemize}
+
+  \framebreak
+
+  \begin{block}{Abridged Problem Statement}
+    Given a chain of matrices $A_{1}A_{2}...A_{n}$, fully parenthesize the chain in a way
+    that minimizes the amount of multiplications to be computed.
+  \end{block}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Matrix-chain Multiplication Problem - Naive approach}
+  Trying to solve this problem with a complete search approach leads us to the question:
+  \\
+  \vspace{1em}
+  In how many different ways can we parenthesize a chain of n matrices?
+
+  \framebreak
+  when $n = 1$, the chain consists of only one matrix which we can only parenthesize in one way.
+  when $n \geq 2$ a fully parenthesized matrix chain is the product of to fully parenthesized
+  subproducts, and the split between two products may occur between the $kth$
+  and the $(k + 1)st$ matrices for any $k = 1, 2, ..., n - 1 $. obtaining:
+    \[
+      P(n) = \left\{\begin{array}{lr}
+        1, & \text{if } n = 1,\\
+        \sum_{k=1}^{n-1}P(k)P(n-k), & \text{if } n \geq 2.
+        \end{array}\right\}
+    \]
+  
+  The time complexity for this recurrence is exponential! ($O(2^n)$)
+\end{frame}
+
+\begin{frame}{Matrix Multiplication Problem - Optimal Solution Structure}
+  \begin{block}{Definition}
+   Denote the matrix $A_{i...j}$ as the matrix obtained from the product
+   of multiplying matrices $A_{i}A_{i+1}...A_{j}$ \\
+  \vspace{0.5em}
+  For the non trivial problem, we must split the product between matrices $A_k$ and $A_{k+1}$,
+  with $ i \leq k < j$. The cost of parenthesizing this way is the cost
+  of computing the matrix $A_{i...k}$, the cost of computing $A_{k+1...j}$,
+  and the cost of multiplying both matrices together
+  \end{block}
+
+  \pause
+  \begin{alertblock}{Optimality}
+    An optimal parenthesization is composed of two optimal parenthesized matrix products as well,
+    if any of these two composing it are not optimal parenthesizations, our optimal parenthesization can not be optimal,
+    a contradiction!
+  \end{alertblock}
 \end{frame}
 
 \begin{frame}{Matrix Multiplication Problem - Recursive Solution}
+  % was meinte Clemens hier diesbezüglich? diese Formel verständlich
+  % machen
+    \[
+    m[i,j] = \left\{\begin{array}{lr}
+      0, & \text{if } i = j,\\
+      min_{i \leq k < j} \{m[i,k] + m[k + 1, j] + p_{i-1}p_{k}p_{j}\} & \text{otherwise}
+      \end{array}\right\}
+    \]
   
 \end{frame}
 
