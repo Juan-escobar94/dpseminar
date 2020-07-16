@@ -86,25 +86,48 @@
   \end{block}
 
   \pause
-  \begin{alertblock}{Optimality}
-    An optimal parenthesization is composed of two optimal parenthesized matrix products as well,
-    if any of these two composing it are not optimal parenthesizations, our optimal parenthesization can not be optimal,
-    a contradiction!
+  \begin{alertblock}{Optimal Substructures}
+    % drüber nachdenken wie man dies anders ausdrücken kann (kürzer)
+    An optimal parenthesization is composed of two parenthesized matrix products as well,
+    which in turn, also have to be optimal: if this weren't the case, then there must be another
+    way to parenthesize this chain, meaning that the parenthesization we claimed as optimal would not
+    be optimal, a contradiction!
   \end{alertblock}
 \end{frame}
 
 \begin{frame}{Matrix Multiplication Problem - Recursive Solution}
-  
-    \[
-    m[i,j] = \left\{\begin{array}{lr}
-      0, & \text{if } i = j,\\
-      min_{i \leq k < j} \{m[i,k] + m[k + 1, j] + p_{i-1}p_{k}p_{j}\} & \text{otherwise}
-      \end{array}\right\}
-    \]
-  
+  for a chain of matrices $A_{i...j}$ let us define a structure $m[i, j]$ as an array
+  that stores the solution to all the subproblems that can arise
+  along the process.
+  \vspace{0.5em}
+  the case $i = j$ is trivial, no multiplications are necessary %to compute the product of a single matrix.
+  \\
+  In the non trivial case, $i < j$, we make use of the structure of an optimal solution.
+  We split the product at  $A_k$ and $A_{k+1}$
+  \vspace{0.5em}
+  %Defining the cost of splitting the product at matrices $A_k$ and $A_{k+1}$ as the optimal
+  %cost of each product individually, plus the cost of multiplying both matrices together.
+  \\
+  We do not know the value of k that guarantees us the optimal solution, so we iterate over
+  all possible $i - j$ values, yielding:   
+
+  \[
+  m[i,j] = \left\{\begin{array}{lr}
+    0, & \text{if } i = j,\\
+    min_{i \leq k < j} \{m[i,k] + m[k + 1, j] + p_{i-1}p_{k}p_{j}\} & \text{otherwise}
+    \end{array}\right\}
+  \]
 \end{frame}
 
 \begin{frame}{Matrix Multiplication Problem - Computing Optimal Costs}
+  At this point we have the following choices:
+  \begin{itemize}
+    \item use a top-down approach, implement the recursive solution and add memoization.
+    \item make use of a tabular, bottom-up approach with no necessity of recursion.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
   
 \end{frame}
 
