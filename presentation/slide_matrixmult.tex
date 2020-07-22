@@ -3,10 +3,10 @@
 
 \begin{frame}{Matrix-chain Multiplication Problem}
   It is known that multiplying matrices is a very frequent mathematical
-  operation among the most varied application fields. Multiplying Matrices 
+  operation among the most varied application fields. Multiplying matrices 
   $A_1$ and $A_2$ requires matching dimensions: the number of rows in $A_1$
-  must match the number of columns in $A_2$ if one is to multiply the Matrices 
-  in this order $A_{1}A_{2}$.
+  must match the number of columns in $A_2$ if one is to multiply the matrices 
+  in the order $A_{1}A_{2}$.
   \\
   \vspace{2em}
   The product obtained by multiplying a chain of matrices $A_{1}A_{2}...A_{n}$ 
@@ -90,7 +90,7 @@
     % drüber nachdenken wie man dies anders ausdrücken kann (kürzer)
     An optimal parenthesization is composed of two parenthesized matrix products as well,
     which in turn, also have to be optimal: if this weren't the case, then there must be another
-    way to parenthesize this chain, meaning that the parenthesization we claimed as optimal would not
+    way to parenthesize this chain, meaning that the "global" parenthesization we claimed as optimal would not
     be optimal, a contradiction!
   \end{alertblock}
 \end{frame}
@@ -125,12 +125,116 @@
     \item use a top-down approach, implement the recursive solution and add memoization.
     \item make use of a tabular, bottom-up approach with no necessity of recursion.
   \end{itemize}
+  \vspace{0.7em}
+  consider P to be a list describing the dimensions in the matrix chain, following the schema
+  [$rows_{A_{1}}  \times columns_{A_{1}}(rows_{A_{2}}) \times columns_{A_{2}} (rows_{A_{3}}) ... columns_{A_{n}}$]:
+  \\
+  \vspace{0.7em}
+  \begin{tabular}{r|ccc}
+    matrix & $A_1$ & $A_2$ & $A_3$ \\
+    \hline 
+    dimensions & $\textcolor{blue}{3} \times \textcolor{green}{5}$ & $\textcolor{green}{5} \times \textcolor{pink}{2}$ & $\textcolor{pink}{2} \times \textcolor{orange}{3}$ \\
+    P & [\textcolor{blue}{3}, \textcolor{green}{5}, \textcolor{pink}{2}, \textcolor{orange}{3}]
+  \end{tabular}
+
 \end{frame}
 
-\begin{frame}
+\begin{frame}[fragile]{Bottom-Up Approach}
   
+  \begin{lstlisting}
+    INF = 1 << 32
+    
+    def matrix_chain_order(p):
+      n = len(p)
+      m = [[INF] * (n-1) for x in range(n-1)] # store optimal costs value 
+      s = [[0] * (n-1) for x in range(n-1)] # store k value to reconstruct solution
+      for i in range(0, n-1):
+        m[i][i] = 0
+        for l in range(2, n):
+          for i in range(0, n-l):
+            j = i + l - 1
+            for k in range(i, j):
+              q = m[i][k] + m[k+1][j] + p[i]*p[k+1]*p[j+1]
+              if (q < m[i][j]):
+                m[i][j] = q
+                s[i][j] = k
+      return (m, s)
+  \end{lstlisting}
 \end{frame}
 
-\begin{frame}{Matrix Multiplication Problem - Constructing an Optimal Solution}
-  
+\begin{frame}{Matrix-chain Multiplication Problem: Example}
+  \begin{exampleblock}{Example}
+    consider the matrix chain described by P = [4, 5, 2, 3, 5]
+  \end{exampleblock}
+
+  \vspace{0.5em}
+
+  $
+    \begin{bmatrix}
+      \infty & \infty & \infty & \infty \\
+      \infty & \infty & \infty & \infty \\
+      \infty & \infty & \infty & \infty \\
+      \infty & \infty & \infty & \infty \\
+    \end{bmatrix}
+  $
+  \pause
+  $
+    \begin{bmatrix}
+      0 & \infty & \infty & \infty \\
+      \infty & 0 & \infty & \infty \\
+      \infty & \infty & 0 & \infty \\
+      \infty & \infty & \infty & 0 \\
+    \end{bmatrix}
+  $
+  \pause
+   $
+    \begin{bmatrix}
+      0 & 40 & \infty & \infty \\
+      \infty & 0 & 30  & \infty \\
+      \infty & \infty & 0 & 30 \\
+      \infty & \infty & \infty & 0 \\
+    \end{bmatrix}
+  $
+  \pause
+  $
+    \begin{bmatrix}
+      0 & 40 & 64 & \infty \\
+      \infty & 0 & 30  & 75 \\
+      \infty & \infty & 0 & 30 \\
+      \infty & \infty & \infty & 0 \\
+    \end{bmatrix}
+  $
+  \pause
+   $
+    \begin{bmatrix}
+      0 & 40 & 64 & 110 \\
+      \infty & 0 & 30  & 75 \\
+      \infty & \infty & 0 & 30 \\
+      \infty & \infty & \infty & 0 \\
+    \end{bmatrix}
+  $
+\end{frame}
+
+
+\begin{frame}[fragile]{Matrix Multiplication Problem - Printing the Optimal Solution}
+  \begin{lstlisting}
+    def printOptimal(s, i, j):
+      if i == j:
+          print("A_" + str(i+1), end="")
+      else:
+          print("(", end="")
+          printOptimal(s, i, s[i][j])
+          printOptimal(s, s[i][j]+1, j)
+          print(")", end="")
+
+    #print the result
+    printOptimal(s, 0, 3)
+  \end{lstlisting}
+
+  Calling the code above to print the actual solution yields: \\
+  \vspace{0.5em}
+  \pause 
+  \[
+   ((A_{1}A_{2})(A_{3}A_{4})) 
+  \]
 \end{frame}

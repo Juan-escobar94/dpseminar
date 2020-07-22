@@ -1,38 +1,8 @@
 \section{Elements Of Dynamic Programming}
 
-% \begin{frame}{Elements Of Dynamic Programming}
-%   \begin{block}{Key Aspects}
-%     \begin{enumerate}
-%       \item Optimal Substructures
-%     \end{enumerate}
-%   \end{block}
-% \end{frame}
-
-
 \begin{frame}{Elements Of Dynamic Programming}
   \begin{block}{Key Aspects}
     \begin{enumerate}
-      \item Optimal Substructures
-    \end{enumerate}
-    \pause
-    The solution for a subproblem is part of the solution of the original problem
-  \end{block}
-\end{frame}
-
-% \begin{frame}{Elements Of Dynamic Programming}
-%   \begin{block}{Key Aspects}
-%     \begin{enumerate}
-%       \item Optimal Substructres
-%       \item Overlapping Subproblems
-%     \end{enumerate}
-%   \end{block}
-% \end{frame}
-
-
-\begin{frame}{Elements Of Dynamic Programming}
-  \begin{block}{Key Aspects}
-    \begin{enumerate}
-      \item Optimal Substructures
       \item Overlapping Subproblems
     \end{enumerate}
     \pause
@@ -41,29 +11,14 @@
   \end{block}
 \end{frame}
 
-
-\begin{frame}{Elements of DP: Rod-cutting Problem Example}
-  Let us examine this properties based on the following problem:
-  \begin{block}{Rod-cutting Problem Abridged Problem Statement}
-  Given a rod of length n, and a table of prices $p_i$ for $i = 1, 2, ..., n$,
-determine the maximum revenue $r_n$ obtained by cutting the rod and selling the pieces
+\begin{frame}{Elements Of Dynamic Programming}
+  \begin{block}{Key Aspects}
+    \begin{enumerate}
+      \item Overlapping Subproblems
+      \item Optimal Substructures
+    \end{enumerate}
+    \pause
+    In optimization problems on which Dynamic Programming is applied to, the optimal solution to the problem contains 
+    within it optimal solution to subproblems.
   \end{block}
-  %format differently?
-\end{frame}
-
-\begin{frame}{Elements of DP: Rod-cutting Problem Example}
-  With the following Price Table:
-  \\
-  \vspace{2em}
-\begin{table}[ht]
-  \centering
-  \begin{tabular}{l|ll}
-    \textbf{length i}&\textbf{price $p_i$}\\\hline
-      1 & 2\\
-      2 & 6\\
-      3 & 7\\
-      4 & 8\\
-      5 & 9
-  \end{tabular}
-\end{table}
 \end{frame}

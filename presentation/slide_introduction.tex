@@ -6,27 +6,27 @@
   \begin{block}{Definition}
    What is Dynamic Programming?
    \begin{itemize}
-     \item Problem Solving Paradigm
-     \item Algorithm Design Technique
+     \item Problem solving paradigm
+     \item Algorithm design technique
    \end{itemize}
   \end{block}
 \end{frame}
 
-\begin{frame}
-  \frametitle{Introduction}
-  \begin{block}{Key Properties}
-   A problem which is solvable through Dynamic
-   Programming has the following properties:
-   \begin{itemize}
-     \item Optimal Substructure
-     \item Overlapping Subproblems
-   \end{itemize}
-  \end{block}
+% \begin{frame}
+%   \frametitle{Introduction}
+%   \begin{block}{Key Properties}
+%    A problem which is solvable through Dynamic
+%    Programming has the following properties:
+%    \begin{itemize}
+%      \item Optimal substructure
+%      \item Overlapping subproblems
+%    \end{itemize}
+%   \end{block}
 
   % \begin{alertblock}{}
   %   here is some thext
   % \end{alertblock}
-\end{frame}
+% \end{frame}
 
 \subsection{Fibonacci Sequence}
 \begin{frame}
@@ -116,9 +116,9 @@
   \end{tikzpicture}
   \caption{Fibonacci recursion tree with $n = 6$}
 \end{figure}
-\begin{alertblock}{!}
+\begin{alertblock}{Unnecessary Computations: Overlapping subproblems}
   Every red-colored Node is a computation we are doing not for the
-  first time!
+  first time! This a key property in Dynamic Programing.
 \end{alertblock}
 \end{frame}
 
@@ -151,7 +151,7 @@
     Our modifications to the original approach have
     caused changes in the following aspects in our program:
     \begin{itemize}
-      \item Memory Usage
+      \item Memory usage
       \item Time needed to compute the solution
     \end{itemize}
   \end{block}
