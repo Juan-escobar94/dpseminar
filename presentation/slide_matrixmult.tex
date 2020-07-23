@@ -199,7 +199,7 @@
   $
     \begin{bmatrix}
       0 & 40 & 64 & \infty \\
-      \infty & 0 & 30  & 75 \\
+      \infty & 0 & 30  & 80 \\
       \infty & \infty & 0 & 30 \\
       \infty & \infty & \infty & 0 \\
     \end{bmatrix}
@@ -208,7 +208,7 @@
    $
     \begin{bmatrix}
       0 & 40 & 64 & 110 \\
-      \infty & 0 & 30  & 75 \\
+      \infty & 0 & 30  & 80 \\
       \infty & \infty & 0 & 30 \\
       \infty & \infty & \infty & 0 \\
     \end{bmatrix}
@@ -232,9 +232,13 @@
   \end{lstlisting}
 
   Calling the code above to print the actual solution yields: \\
-  \vspace{0.5em}
+  \vspace{0.1em}
   \pause 
-  \[
-   ((A_{1}A_{2})(A_{3}A_{4})) 
-  \]
+  $ s = \begin{bmatrix}
+      0 & 1 & 2 & 2 \\
+      0 & 0 & 2  & 2 \\
+      0 & 0 & 0 & 3 \\
+      0 & 0 & 0 & 0 \\
+    \end{bmatrix}
+    sol = ((A_{1}A_{2})(A_{3}A_{4}))$
 \end{frame}
