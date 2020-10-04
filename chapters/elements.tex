@@ -10,10 +10,10 @@ mentioned this traits: Optimal Substructures and Overlapping Substructures.
 As we have seen in the Fibonacci example, solutions to problems are 
 related to solution to its sub-problems. The Tree representation for Fibonacci 
 makes this concept very clear: The solution to a node placed in a higher 
-level depends on the solution to its sub-problems: the nodes situated under it.
+level depends on the solution to its sub-problems, which are the nodes situated under it.
 
 In optimization problems, an optimal solution to a problem involves optimally
-solving its subproblems. A useful to illustrate this is the rod-cutting problem:
+solving its subproblems. A useful problem to illustrate this is the rod-cutting problem:
 
 \indent \emph{Abridged Problem Statement}: given a rod of length n, and a table of prices $p_i$ for $i = 1, 2, ..., n$,
 determine the maximum revenue $r_n$ obtained by cutting the rod and selling the pieces \cite{cormen2009introduction}
@@ -34,7 +34,7 @@ Suppose we have the following price table:
 \end{table}
 
 Having a rod of length $l = 1$ is quite trivial, the optimal solution is to leave the rod as it is, as we 
-assume it cannot be cut furthermore. a road of length $l = 2$ is already at optimal length,
+assume it cannot be cut furthermore. A rod of length $l = 2$ is already at optimal length,
 as its selling price 6 is higher than selling two rods of length $l = 1$ for a total of 4.
 We see for example of length $l = 3$ that the optimal solution is cutting once, leaving
 a rod of length $l = 2$ and a rod of length $l = 1$, for a total of $r = 8$. We can see that the optimal
@@ -44,7 +44,7 @@ $l = 2$. cutting a rod at length k creates two sub problems, ranging from
 $1 - k$ and $k+1 - n$. Both of these problems must be optimally solved in order to obtain max revenue.
 
 For example, having a rod of length $l = 5$, we cut the rod at $k = 2$, leaving us with rods of length
-$l = 2$ and length $l = 3$, if we were to cut the first road again, we will loose revenue, this road is already
+$l = 2$ and length $l = 3$, if we were to cut the first road again, we will loose revenue, this rod is already
 optimally cut. But we can the rod of length $l = 3$ into pieces of lengths $l = 2$ and $l = 1$, for a total revenue of
 14. If we were to sell the rod uncut, $l = 5$,  we would receive only a revenue of 9.
 

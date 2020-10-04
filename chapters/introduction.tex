@@ -58,9 +58,9 @@ the program would take to compute an arbitrary number $n$, in the form of a tree
 \end{figure}
 
 The red nodes in Figure \ref{fig:fib1} still have to be visited by the algorithm, and they are expanded all 
-way down into a node with label one or zero, even though if the answer was already computed in any other 
-branch of the tree. This repetitive computation slows down the program drastically as $n$ grows,
-you can see that the number of nodes grows exponentially, since for every level we traverse down,
+way down into a node with label one or zero, even if the answer was already computed in any other 
+branch of the tree. This repetitive computation may slow down the program drastically as $n$ grows.
+You can see that the number of nodes grows exponentially, since for every level we traverse down,
 the number of nodes potentially double: the time complexity for this algorithm is $O(2^n)$, which is 
 the number of nodes.
 
@@ -100,12 +100,12 @@ the number of nodes.
 \end{figure}
 
 In Figure \ref{fig:fib2} we expanded one of the red nodes labeled with 4: it gets computed twice, completely.
-expanding all the tree would show us that node 3 gets computed three times, node 2 gets computed five times.
+Expanding all the tree would show us that node 3 gets computed three times, node 2 gets computed five times.
 If we chose $n = 7$, for example, node 2 would be computed eight times. This unnecessary repeated
-computations are  what makes this algorithm so slow.
+computations are what makes this algorithm so slow.
 
 Now, what if instead of repeating all this computations, the answers are stored somewhere? Each
-time the algorithm would start, it would instead look up in some kind of record or table, 
+time the algorithm would start a computation, it would instead look up in some kind of record or table, 
 and if it finds a value, it just simply returns the value found immediatly.
 
 
@@ -129,5 +129,3 @@ def dp_fibonacci(n):
 Applying this change to the algorithm, yields a linear run time $O(n)$. This is because instead of expanding the
 nodes marked red, \texttt{dp\_fibonacci} just retrieves the value from a dictionary, which is $O(1)$. This
 is a tremendous gain in performance.
-
-

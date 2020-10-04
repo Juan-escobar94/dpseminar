@@ -3,13 +3,13 @@
 The Matrix-Chain Multiplication problem is another example in which we can 
 apply Dynamic Programming, yielding important performance gains.
 
-Suppose we have a product (also called chain) of Matrices, numbered from 1 to n. Their product is
+Suppose we have a product (also called chain) of Matrices, numbered from 1 to $n$. Their product is
 calculated as follows:
 
 $$A_1A_2A_3...A_n$$
 
 The number of scalar multiplications that have to be performed when multiplying matrices $A_1$
-and $A_2$ with dimensions $m_1 \times n_1$ and $m_2\times n_2$ is equal to $m_1*n_1*n_2$ .Remember that
+and $A_2$ with dimensions $m_1 \times n_1$ and $m_2\times n_2$ is equal to $m_1*n_1*n_2$. Remember that
 for a product of two matrices, rows and columns must match in their number, else the matrices are not 
 compatible and the multiplication can not be performed, hence we could have also written $m_1*m_2*n_2$
 
@@ -24,28 +24,28 @@ the product \cite{cormen2009introduction}
 
 Now, how does this problem relate to Dynamic Programming? as we just said, in matrix 
 multiplication, the way we parenthesize does not alter the end product, in other words it is
-\emph{associative}, meaning:  $((A_1A_2)A_3) = (A_1((A_2A_3))$: by using Dynamic Programming
+\emph{associative}, meaning:  $((A_1A_2)A_3) = (A_1((A_2A_3))$: By using Dynamic Programming
 we can abuse the nature of this problem (exhibits both optimal substructures and
 overlapping subproblems, as we will see) and find an optimal parenthesization.
 
-This problem clearly posseses the property of optimal substructures, an optimal 
+This problem clearly posseses the property of optimal substructures, as an optimal 
 parenthesized product consists as well of optimal parenthesized products. An optimal
 parenthesized product would be the parenthesization resulting in the minimum of 540
 multiplications in our previous example. Suppose instead of having matrices $A_1$, 
 $A_2$ and $A_3$ we had products of matrices, which in turn must be optimally parenthesized
 to yield an optimal solution.
 
-The abridged problem statement can be written down as follows: given a n chain of matrices,
+The abridged problem statement can be written down as follows: given a $n$ chain of matrices,
 find a parenthesization with the least ammount of multiplications. These matrices are compatible
 for multiplication, and for $i = 1, 2, ..., n$ the matrix $A_i$ has dimension $p_{i-1} * p_i$
 
 
 In order to better understand the search space for this problem, let us first count the number
 of ways we can parenthesize a matrix chain. in \cite{cormen2009introduction}, the number of
-parenthesizations of a sequence of n matrices are denoted by P(n). When n = 1, there is just one matrix and there is only
+parenthesizations of a sequence of n matrices are denoted by $P(n)$. When $n = 1$, there is just one matrix and there is only
 one way to parenthesize it. when $n \geq 2$, a fully parenthesized matrix chain is the product of to 
-fully parenthesized subproducts, and the split between two products may occur between the \emph{k}th and the
-\emph{(k + 1)}st matrices for any k = 1, 2, ..., n-1. obtaining:
+fully parenthesized subproducts, and the split between two products may occur between the \emph{$k$}th and the
+\emph{($k + 1$)}st matrices for any $k = 1, 2, ..., n-1$. obtaining:
   \\
   \[
     P(n) = \left\{\begin{array}{lr}
@@ -57,7 +57,7 @@ fully parenthesized subproducts, and the split between two products may occur be
 
 
 The solution to this recurrence is $\Omega (2^n)$ \cite{cormen2009introduction}, for an input of n matrices.
-going over all possible solutions using a brute force approach is a quite unefficient strategy.
+Going over all possible solutions using a brute force approach is a quite unefficient strategy.
 
 
 \textbf{Definition}: Denote the matrix $A_{i...j}$ as the matrix obtained from the product of
@@ -86,7 +86,7 @@ that stores the solution to all the subproblems that can arise along the
 process. the case $i = j$ is trivial, no multiplications are necessary
 In the non trivial case, $i < j$, we make use of the structure of an optimal
 solution. We split the product at $A_k$ and $A_{k+1}$
-We do not know the value of k that guarantees us the optimal solution, so
+We do not know the value of $k$ that guarantees us the optimal solution, so
 we iterate over all possible $i\-- j$ values, yielding following recurrence:
  \\
   \[
@@ -100,13 +100,13 @@ we iterate over all possible $i\-- j$ values, yielding following recurrence:
 To solve a problem using Dynamic Programming, we have, again, the following choices:
 
 \begin{itemize}
-  \item use a top-down approach, implement the recursive solution and add memoization.
-  \item make use of a tabular, bottom-up approach with no necessity of recursion.
+  \item Use a top-down approach, implement the recursive solution and add memoization.
+  \item Make use of a tabular, bottom-up approach with no necessity of recursion.
 \end{itemize}
 
 As we already have seen the top-down approach, we will go though the bottom-up version.
 
-Consider P to be a list describing the dimensions in the matrix chain, following the schema
+Consider P to be a list describing the dimensions in the matrix chain, following the schema:
 
 [$rows_{A_{1}}  \times columns_{A_{1}}(rows_{A_{2}}) \times columns_{A_{2}} (rows_{A_{3}}) ... columns_{A_{n}}$]:
 
@@ -140,20 +140,20 @@ A possible implementation for the bottom up solution would be as follows:
       return (m, s)
   \end{minted}
 
-First, we store the length of the matrix chain in a variable called n. Remember that p is the list describing the matrix dimensions.
-We define INF to be a very large number, so that we can initialize the optimal costs matrix in a convenient manner 
-(the comparison on line 14 will always evaluate to true against any value = INF).
+First, we store the length of the matrix chain in a variable called $n$. Remember that $p$ is the list describing the matrix dimensions.
+We define $INF$ to be a very large number, so that we can initialize the optimal costs matrix in a convenient manner 
+(the comparison on line 14 will always evaluate to true against any $value = INF$).
 
 Now, we start computing the optimal values increasing the chain length, Line 8 does this for the trivial case and on line 10 we loop over the chain length 
 to compute all the possible costs. It is important to note that we do compute all possible results from all possible parenthezisations, but no more than once, 
 which is the perk of using Dynamic Programming.
 
 Line 11 sets the upper bound for the recurrence function we have seen previously. From there on, we move through the matrix chain in a sliding-window fashion
-evaluating all possible sub-chains of length l. We also split everywhere possible when evaluating a chain of length l (line 12), and we compute the cost value depending on 
+evaluating all possible sub-chains of length $l$. We also split everywhere possible when evaluating a chain of length $l$ (line 12), and we compute the cost value depending on 
 those we have already computed, which then gets stored if it is lower than the previous cost we had computed.
 
-The value stored inside of m[1, n] is the cost of multiplying the matrix chain in an optimally parenthesized way. But which is actually the optimal way?
-we used another auxiliary array, namely s in which we store the values of k, which denote where we have splitted the chain yielding 
+The value stored inside of $m[1, n]$ is the cost of multiplying the matrix chain in an optimally parenthesized way. But which is actually the optimal way?
+we used another auxiliary array, namely $s$ in which we store the values of k, which denote where we have splitted the chain yielding 
 optimal costs, for all possible chain length, allowing us to trace back where we have to set our parenthesis.
 
 In order to achieve this goal, consider the following procedure:
@@ -196,7 +196,7 @@ And then assign cost 0 for the trivial cases:
   \]
 We calculate the optimal costs for increasing chain lengths, until we get to the length of our matrix chain.
 
-compute the values for chain length = 2
+Compute the values for chain length $l = 2$
   \[
     \begin{bmatrix}
       0 &  \textcolor{green}{40} & \infty & \infty \\
@@ -211,7 +211,7 @@ $\textcolor{green}{40} = m[0,0] + m[1,1] + 4*5*2 : (A_{1}A_{2})$
 $\textcolor{green}{40} = 0 + 0  + 40 : (A_{1}A_{2})$
 \\
 \\
-compute the values for chain length = 3
+Compute the values for chain length $l = 3$
   \[
     \begin{bmatrix}
       0 & 40 & \textcolor{green}{64} & \infty \\
@@ -238,7 +238,7 @@ $\textcolor{red}{105} = m[1, 2] + m[2,2] + 5*3*5 : ((A_{2}A_{3})A_{4})$
 $\textcolor{red}{105} = 30 + 0 + 75 : ((A_{2}A_{3})A_{4})$.
 \\
 \\
-compute the values for chain length = 4 (full length in our case)
+Compute the values for chain length $l = 4$ (full length in our case)
 \[
   \begin{bmatrix}
     0 & 40 & 64 & \textcolor{green}{110} \\
@@ -252,10 +252,10 @@ $\textcolor{green}{110} =  m[0,1] + m[2,3] + 4*2*5 : ((A_{1}A_{2})((A_{3}A_{4}))
 
 $\textcolor{green}{110} =  40 + 30 +  40 : ((A_{1}A_{2})((A_{3}A_{4})) $
 \\
-We can clearly see that we constantly make use of values we have stored in our array m, which saves us computation steps.
+We can clearly see that we constantly make use of values we have stored in our array $m$, which saves us computation steps.
 \\
 \\
-calling printOptimal(s, 0, 3) yields:
+Calling printOptimal(s, 0, 3) yields:
 \space{0.3em}
 $ s = \begin{bmatrix}
     0 & 1 & 2 & 2 \\
