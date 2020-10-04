@@ -1,4 +1,19 @@
 \section{Top-down vs Bottom-up}
 
 We have seen that two common ways to apply Dynamic Programming are using the top-down approach with memoization
-and the bottom-up method. Each of these have their own pros and cons. 
+and the bottom-up method. 
+
+Top-down approaches are a natural transformation from the complete search recursion, meaning we take the recursive function
+and adjust the computation to always perform a look up in the data structure first. Due to the recursive nature of the
+top-down approach, problems that are continously revisited may lead to a big function call overhead, slowing down the 
+process. 
+
+On the other hand, bottom-up approaches have no overhead from recursive function calls, as they are not defined
+in a recursive fashion. Instead, every single sub-problem from the bottom (e.g. the first Fibonacci numbers) is visitied, and 
+in contrast to the top-down approach, they are visited only once. This style of problem solving is generally for most programmers
+not as intuitive as the top-down approach.
+
+Depending on the problem, either approach can have better performance. In some cases the top down approach may not cover the entire search space,
+and visit, as just said, only the necessary subproblems to solve the main problem. It could also be that a sub problem is visited a tremendous amount of times
+making the bottom up variant better, as the nested recursive call can end up beind costly in terms of overhead and computing time, likewise.s
+
